@@ -1,6 +1,6 @@
 {
-  "name": "js-rzae17",
-  "version": "0.0.0",
+  "name": "wc-redux-litelement",
+  "version": "0.0.1",
   "private": true,
   "dependencies": {
     "@webcomponents/webcomponentsjs": "^2.3.0",
