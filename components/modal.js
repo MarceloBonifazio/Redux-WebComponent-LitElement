@@ -15,8 +15,8 @@ store.addReducers({
 class Modal extends connect(store)(LitElement) {
   static get properties() {
     return {
-      _modal: { type: Boolean },
-      titleModal: { type: String }
+      _modalOpen: { type: Boolean },
+      _titleModal: { type: String }
     };
   }
 
@@ -57,14 +57,15 @@ class Modal extends connect(store)(LitElement) {
   render() {
     return html`
       <div
-        style="${this._modal && `display: block;`}"
+        id="reveal-overlay"
+        style="${this._modalOpen && `display: block;`}"
         class="reveal-overlay"
         @click="${this.closeModal}">
-        <div class="reveal">
+        <div class="reveal" id="simple-modal">
           <header class="modal-primary-header">
-            <h2 class="modal-primary-heading">${this.titleModal}</h2>
+            <h2 class="modal-primary-heading">${this._title}</h2>
           </header>
-          <slot class="modal-primary-row" name="body"></slot>
+          ${this._body}
         </div>
       </div>`;
   }
@@ -74,7 +75,9 @@ class Modal extends connect(store)(LitElement) {
   }
 
   stateChanged(state) {
-    this._modal = state.component._modalOpen;
+    this._modalOpen = state.component._modalOpen;
+    this._title = state.component.attibutes.title;
+    this._body = state.component.attibutes.content;
   }
 }
 

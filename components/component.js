@@ -23,17 +23,40 @@ class Component extends connect(store)(LitElement) {
 
   render() {
     return html`
-      <button class="button-primary" @click="${this._showModal}">
+      <button @click="${this._showModal}">
         Button Modal
       </button>
-      <simple-modal titleModal="Test Header">
-        <div slot="body">Test Content</div>
-      </simple-modal>
+      <button @click="${this._showAnotherModal}">
+        Another Modal
+      </button>
+      <simple-modal></simple-modal>
     `;
   }
 
+  _showAnotherModal() {
+    const payload = {
+      title: 'MyAnotherModal',
+      defaultSize: {
+        height: 500,
+        width: 500
+      },
+      content: html`<div>I'm a another content</div>`
+    }
+
+    store.dispatch(show_modal(payload));
+  }
+
   _showModal() {
-    store.dispatch(show_modal());
+    const payload = {
+      title: 'MyModal',
+      defaultSize: {
+        height: 500,
+        width: 500
+      },
+      content: html`<div>I'm a content</div>`
+    }
+
+    store.dispatch(show_modal(payload));
   }
 }
 

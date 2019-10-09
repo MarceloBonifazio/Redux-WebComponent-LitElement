@@ -1,9 +1,10 @@
 export const SHOW_MODAL = 'SHOW_MODAL';
 export const HIDE_MODAL = 'HIDE_MODAL';
 
-export const show_modal = () => {
+export const show_modal = (payload) => {
   return {
-    type: SHOW_MODAL
+    type: SHOW_MODAL,
+    payload
   };
 };
 
