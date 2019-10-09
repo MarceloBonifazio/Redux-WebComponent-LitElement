@@ -2,9 +2,10 @@ import { LitElement, html, css } from 'lit-element';
 import { connect } from 'pwa-helpers/connect-mixin.js';
 import { store } from '../store.js';
 
+import './modal';
+
 import {
-  show_modal,
-  hide_modal
+  show_modal
 } from '../actions/component';
 
 import component from '../reducers/component.js';
@@ -16,24 +17,24 @@ store.addReducers({
 class Component extends connect(store)(LitElement) {
   static get properties() {
     return {
-      _modal: { type: String }
+      _modal: { type: Boolean }
     };
   }
 
-  static get styles() {
-    return [
-      css``
-    ];
-  }
-
   render() {
-    console.log('here');
-    return html`test`;
+    return html`
+      <button class="button-primary" @click="${this._showModal}">
+        Button Modal
+      </button>
+      <simple-modal titleModal="Test Header">
+        <div slot="body">Test Content</div>
+      </simple-modal>
+    `;
   }
 
-  stateChanged(state) {
-    
+  _showModal() {
+    store.dispatch(show_modal());
   }
 }
 
-window.customElements.define('my-component', Component);
+customElements.define('my-component', Component);
