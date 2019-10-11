@@ -5,6 +5,7 @@
   "dependencies": {
     "@webcomponents/webcomponentsjs": "^2.3.0",
     "lit-element": "^2.2.1",
+    "pell": "^1.0.6",
     "pwa-helpers": "^0.9.1",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0"

@@ -8,11 +8,8 @@ import {
 const INITIAL_STATE = {
   attibutes: {
       title: '',
-      defaultSize: {
-        height: 0,
-        width: 0
-      },
-      content: ''
+      content: '',
+      closeWhenClickOutside: true
   },
   _modalOpen: false
 };

@@ -2,6 +2,8 @@ import { LitElement, html, css } from 'lit-element';
 import { connect } from 'pwa-helpers/connect-mixin.js';
 import { store } from '../store.js';
 
+import { close } from '../svg/icons.js';
+
 import {
   hide_modal
 } from '../actions/component';
@@ -41,7 +43,6 @@ class Modal extends connect(store)(LitElement) {
         border: 1px solid #ccc;
         height: initial;
         left: 50%;
-        max-height: 90%;
         min-width: initial;
         overflow-y: auto;
         padding: 1rem;
@@ -50,6 +51,17 @@ class Modal extends connect(store)(LitElement) {
         transform: translate(-50%, -50%);
         width: 48rem;
         z-index: 1006;
+      }
+      .icon {
+        display: inline;
+        cursor: pointer;
+        float: right;
+      }
+      @media (max-width: 1024px) {
+        .reveal {
+          height: 100%;
+          width: 100%;
+        }
       }
     `;
   }
@@ -60,24 +72,33 @@ class Modal extends connect(store)(LitElement) {
         id="reveal-overlay"
         style="${this._modalOpen && `display: block;`}"
         class="reveal-overlay"
-        @click="${this.closeModal}">
+        @click="${(e) => this.closeModal(e)}">
         <div class="reveal" id="simple-modal">
           <header class="modal-primary-header">
             <h2 class="modal-primary-heading">${this._title}</h2>
+            <span class="icon" @click="${(e) => this.closeModal(e, true)}">
+              ${close}
+            </span>
           </header>
           ${this._body}
         </div>
       </div>`;
   }
 
-  closeModal() {
-    store.dispatch(hide_modal());
+  closeModal(e, forceClose = false) {
+    if (e.composedPath().indexOf(this) === 2 && this._closeWhenClickOutside || forceClose)
+      store.dispatch(hide_modal());
   }
 
   stateChanged(state) {
+    const attributes = state.component.attibutes;
+
+    console.log(attributes);
+
     this._modalOpen = state.component._modalOpen;
-    this._title = state.component.attibutes.title;
-    this._body = state.component.attibutes.content;
+    this._title = attributes.title;
+    this._body = attributes.content;
+    this._closeWhenClickOutside = attributes.closeWhenClickOutside;
   }
 }
 
