@@ -63,6 +63,15 @@ class Modal extends connect(store)(LitElement) {
           width: 100%;
         }
       }
+      .modal-primary-header {
+        margin: 10px;
+      }
+      .modal-primary-heading {
+        display: inline;
+      }
+      .content {
+        margin: 0 10px;
+      }
     `;
   }
   
@@ -80,7 +89,9 @@ class Modal extends connect(store)(LitElement) {
               ${close}
             </span>
           </header>
-          ${this._body}
+          <div class="content">
+            ${this._body}
+          </div>
         </div>
       </div>`;
   }

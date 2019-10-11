@@ -13,7 +13,7 @@ const INITIAL_STATE = {
       closeWhenClickOutside: true
   },
   _modalOpen: false,
-  _content: ''
+  _customContent: ''
 };
 
 const modal = (state = INITIAL_STATE, action) => {
@@ -28,7 +28,7 @@ const modal = (state = INITIAL_STATE, action) => {
     case SET_CONTENT:
       return {
         ...state,
-        _content: action.payload
+        _customContent: action.payload
       };
     default:
       return state;
