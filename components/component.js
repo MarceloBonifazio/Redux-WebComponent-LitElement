@@ -2,7 +2,6 @@ import { LitElement, html, css } from 'lit-element';
 import { connect } from 'pwa-helpers/connect-mixin.js';
 import { store } from '../store.js';
 import { init } from 'pell';
-
 import 'pell/dist/pell.css'
 
 import './modal';
@@ -43,13 +42,14 @@ class Component extends connect(store)(LitElement) {
 
   firstUpdated() {
     this.editor = init({
-      element: document.getElementById('pell'),
+      element: this.shadowRoot.querySelector("#pell"),
       onChange: html => {
         const payload = { html };
         store.dispatch(set_content(payload))
       },
-      actions: ['bold', 'underline', 'italic'],
-    })
+      actions: ["bold","italic","underline","strikethrough","heading1","heading2","paragraph","quote","olist","ulist","code","line","link","image"],
+    });
+    console.log(editor);
   }
 
   _showCustomModal() {
