@@ -8,7 +8,8 @@ import 'pell/dist/pell.css'
 import './modal';
 
 import {
-  show_modal
+  show_modal,
+  set_content
 } from '../actions/component';
 
 import component from '../reducers/component.js';
@@ -35,15 +36,18 @@ class Component extends connect(store)(LitElement) {
       <button @click="${this._showCustomModal}">
         Custom Modal
       </button>
-      <div id="teste"></div>
+      <div id="pell"></div>
       <simple-modal></simple-modal>
     `;
   }
 
   firstUpdated() {
     this.editor = init({
-      element: document.getElementById('teste'),
-      onChange: html => this.setState({ html }),
+      element: document.getElementById('pell'),
+      onChange: html => {
+        const payload = { html };
+        store.dispatch(set_content(payload))
+      },
       actions: ['bold', 'underline', 'italic'],
     })
   }

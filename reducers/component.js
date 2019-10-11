@@ -2,7 +2,8 @@ import moment from 'moment';
 
 import {
   SHOW_MODAL,
-  HIDE_MODAL
+  HIDE_MODAL,
+  SET_CONTENT
 } from '../actions/component';
 
 const INITIAL_STATE = {
@@ -11,7 +12,8 @@ const INITIAL_STATE = {
       content: '',
       closeWhenClickOutside: true
   },
-  _modalOpen: false
+  _modalOpen: false,
+  _content: ''
 };
 
 const modal = (state = INITIAL_STATE, action) => {
@@ -23,6 +25,11 @@ const modal = (state = INITIAL_STATE, action) => {
       };
     case HIDE_MODAL:
       return INITIAL_STATE;
+    case SET_CONTENT:
+      return {
+        ...state,
+        _content: action.payload
+      };
     default:
       return state;
   }

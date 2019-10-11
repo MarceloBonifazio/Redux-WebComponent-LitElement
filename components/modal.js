@@ -92,9 +92,6 @@ class Modal extends connect(store)(LitElement) {
 
   stateChanged(state) {
     const attributes = state.component.attibutes;
-
-    console.log(attributes);
-
     this._modalOpen = state.component._modalOpen;
     this._title = attributes.title;
     this._body = attributes.content;
