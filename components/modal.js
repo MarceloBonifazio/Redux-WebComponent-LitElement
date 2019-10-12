@@ -76,6 +76,7 @@ class Modal extends connect(store)(LitElement) {
   }
   
   render() {
+    console.log(this._body);
     return html`
       <div
         id="reveal-overlay"

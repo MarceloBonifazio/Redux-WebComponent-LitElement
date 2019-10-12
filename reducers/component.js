@@ -20,15 +20,19 @@ const modal = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case SHOW_MODAL:
       return {
+        ...state,
         attibutes: action.payload,
         _modalOpen: true
       };
     case HIDE_MODAL:
-      return INITIAL_STATE;
+      return {
+        ...state,
+        _modalOpen: false
+      };;
     case SET_CONTENT:
       return {
         ...state,
-        _customContent: action.payload
+        _customContent: action.payload.html
       };
     default:
       return state;
